@@ -346,4 +346,3 @@ if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
         "colorscheme zenesque
     endif
 endif
-
