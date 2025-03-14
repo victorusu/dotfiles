@@ -1,0 +1,105 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific aliases and functions
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+        for rc in ~/.bashrc.d/*; do
+                if [ -f "$rc" ]; then
+                        . "$rc"
+                fi
+        done
+fi
+
+unset rc
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto -h'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+else
+    alias ls='ls -h'
+fi
+alias ll='ls -l'
+alias clean='rm -f *~ .*~ \#* .\#*'
+if [ -n $SCRATCH ]; then
+	alias scr='cd $SCRATCH'
+else
+	if [ ! -d ~/Work ]; then
+		mkdir ~/Work
+	fi
+	alias scr='cd ~/Work'
+fi
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Replace vi by vim and set vim as default editor
+which vim 1> /dev/null 2> /dev/null
+if [ $? -eq 0 ]; then
+    alias vi='vim'
+    export EDITOR=vim
+fi
+
+# use Crtl+p and Ctrl+n to navigate through bash history
+__iatest=$(expr index "$-" i)
+case "$TERM" in
+    xterm*|rxvt*|linux)
+        if [[ ${__iatest} > 0 ]]; then
+            bind '"\C-P": history-search-backward'
+            bind '"\C-N": history-search-forward'
+        fi
+    ;;
+esac
+unset __iatest
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+
+# Configure command history
+export HISTSIZE=1000000
+export HISTFILESIZE=100000000
+export HISTTIMEFORMAT='%F %T '
+
+# Force immediate history append
+# Useful for multi terminal sections
+shopt -s histappend
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Expand environment variables that are directory paths, when pressing tab
+shopt -s direxpand
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
