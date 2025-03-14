@@ -56,6 +56,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # Replace vi by vim and set vim as default editor
 which vim 1> /dev/null 2> /dev/null
 if [ $? -eq 0 ]; then
+    alias vimdiff='vimdiff -N'
+    alias vim='vim -N'
     alias vi='vim'
     export EDITOR=vim
 fi
@@ -63,7 +65,7 @@ fi
 # use Crtl+p and Ctrl+n to navigate through bash history
 __iatest=$(expr index "$-" i)
 case "$TERM" in
-    xterm*|rxvt*|linux)
+    xterm*|rxvt*|linux|alacritty)
         if [[ ${__iatest} > 0 ]]; then
             bind '"\C-P": history-search-backward'
             bind '"\C-N": history-search-forward'
@@ -103,3 +105,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export PATH=$PATH:~/Bin/x86_64/bin
