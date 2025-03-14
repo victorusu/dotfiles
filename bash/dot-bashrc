@@ -41,13 +41,13 @@ else
 fi
 alias ll='ls -l'
 alias clean='rm -f *~ .*~ \#* .\#*'
-if [ -n $SCRATCH ]; then
-	alias scr='cd $SCRATCH'
+if [[ -n ${SCRATCH} ]]; then
+	alias scr='cd ${SCRATCH}'
 else
-	if [ ! -d ~/Work ]; then
-		mkdir ~/Work
-	fi
 	alias scr='cd ~/Work'
+	if [ ! -d ~/Work ]; then
+		mkdir -p ~/Work
+	fi
 fi
 
 # colored GCC warnings and errors
