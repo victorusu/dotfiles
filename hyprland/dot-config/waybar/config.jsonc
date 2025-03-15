@@ -15,9 +15,10 @@
           "4": "", // Icon: mail
           "5": "",
           "6": "", // Icon: terminal
-          "special": "",
-          "focused": "",
-          "default": ""
+          "7": "", // Icon: terminal
+          "8": "", // Icon: terminal
+          "9": "", // Icon: terminal
+          "10": "" // Icon: terminal
       }
   },
   "custom/zypper": {
@@ -34,7 +35,8 @@
       "format-ethernet": "",
       "format-linked": "",
       "format-disconnected": "⚠",
-      "format-alt": "{ifname} {essid} ({signalStrength}%)",
+      "format-alt": "{ifname} {ipaddr}",
+      // "format-alt": "{ifname} {essid} ({signalStrength}%)",
       "tooltip-format": "{ifname}: {ipaddr}"
   },
   "cpu": {
