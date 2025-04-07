@@ -2,8 +2,10 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "memory", "cpu", "tray", "pulseaudio", "battery", "clock"],
-  "modules-right": ["custom/zypper", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "clock", "custom/notification"],
+  //"modules-right": ["network", "memory", "cpu", "tray", "pulseaudio", "battery", "clock"],
+  "modules-right": ["custom/zypper", "network", "cpu", "memory", "pulseaudio", "clock", "custom/notification"],
+  // "modules-right": ["custom/zypper", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "clock", "custom/notification"],
+  // "modules-right": ["custom/zypper", "network", "cpu", "memory", "backlight", "battery", "bluetooth", "pulseaudio", "clock", "custom/notification"],
   "hyprland/workspaces": {
       "all-outputs": false,
       "disable-scroll": true,
@@ -38,6 +40,22 @@
       "format-alt": "{ifname} {ipaddr}",
       // "format-alt": "{ifname} {essid} ({signalStrength}%)",
       "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "bluetooth": {
+	"format": "",
+	"format-disabled": "",
+	"format-off": "",
+	"format-connected": " {num_connections}",
+	// "format-connected": " {device_alias}",
+	"tooltip-format": "{controller_address} {status}\n\n{num_connections} connected",
+	"tooltip-format-disabled": "{status}",
+	"tooltip-format-connected": "{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"on-click": "bluetooth toggle; pkill -SIGRTMIN+8 waybar",
+	"on-click-right": "exec alacritty -e sh -c 'bluetoothctl'"
   },
   "cpu": {
       "format": "{usage}% ",

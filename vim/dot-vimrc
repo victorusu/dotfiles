@@ -199,12 +199,6 @@ if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
         quit
     endif
 
-    " Track the engine.
-    Plugin 'SirVer/ultisnips'
-    if !isdirectory(expand('~/.vim/bundle/ultisnips'))
-        PluginInstall
-        quit
-    endif
     " Snippets
     Plugin 'honza/vim-snippets'
     if !isdirectory(expand('~/.vim/bundle/vim-snippets'))
@@ -255,13 +249,6 @@ if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
         set laststatus=2
     endif
 
-    " Trigger configuration
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-    " Split window
-    let g:UltiSnipsEditSplit="vertical"
 
     " Color schemes
     Plugin 'flazz/vim-colorschemes'

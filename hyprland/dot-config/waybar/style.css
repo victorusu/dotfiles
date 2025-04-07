@@ -108,6 +108,10 @@ memory,
     color: @rosewater;
 }
 
+#bluetooth {
+    color: @sky;
+}
+
 #idle_inhibitor {
     margin-right: 12px;
     color: #7cb342;
