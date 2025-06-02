@@ -1,0 +1,6 @@
+sudo zypper in gcc gcc-c++ gcc-fortran git make patch libmount-devel stow meson fastfetch hyprland waybar btop hyprpaper btop swaync pipewire hyprlock hyprshot hyprpolkitagent hyprpicker hyprcursor xdg-desktop-portal-hyprland rofi-wayland hyprland-qtutils hyprland-qt-support hypridle hyprland-wallpapers cliphist alacritty alacritty-bash-completion meslo-lg-fonts stress-ng zlib-devel nasm curl-devel python313-PyYAML ranger squashfs Mesa-libGLESv1_CM-devel Mesa-libGL-devel libpng16-devel ruby-devel kernel-default-devel gcc-32bit gcc-c++-32bit gcc-fortran-32bit libX11-devel-32bit Mesa-32bit Mesa-dri-32bit Mesa-libGL1-32bit Mesa-libGLESv1_CM-devel-32bit Mesa-libva-32bit Mesa-vulkan-device-select-32bit Mesa-gallium-32bit libva-x11-2-32bit patterns-base-x11_enhanced-32bit patterns-base-x11-32bit libva-x11-2-32bit libxkbcommon-x11-0-32bit xcb-proto-devel libpng12-0 libpng12-0-32bit libpng12-devel libpng16-16-32bit libpng16-devel-32bit retroarch
+
+
+sudo zypper install cronie
+sudo zypper in qemu virt-manager libvirt qemu-kvm bridge-utils qemu-hw-display-virtio-vga qemu-hw-display-virtio-gpu qemu-hw-display-virtio-gpu-pci virt-install virt-viewer
+
