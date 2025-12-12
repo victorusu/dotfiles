@@ -2,7 +2,7 @@ sudo zypper in gcc gcc-c++ gcc-fortran git make patch libmount-devel stow meson 
 
 
 sudo zypper install cronie
-sudo zypper in qemu virt-manager libvirt qemu-kvm bridge-utils qemu-hw-display-virtio-vga qemu-hw-display-virtio-gpu qemu-hw-display-virtio-gpu-pci virt-install virt-viewer
+sudo zypper in qemu virt-manager libvirt qemu-kvm bridge-utils qemu-hw-display-virtio-vga qemu-hw-display-virtio-gpu qemu-hw-display-virtio-gpu-pci virt-install virt-viewer guestfs-tools
 
 sudo usermod -a -G qemu,kvm,libvirt $USER
 
