@@ -6,9 +6,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/Bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+    PATH="$HOME/.local/bin:$HOME/Bin:$PATH"
 fi
 export PATH
 
@@ -39,6 +39,8 @@ if [ -x /usr/bin/dircolors ]; then
 else
     alias ls='ls -h'
 fi
+
+# some more aliases
 alias ll='ls -l'
 alias open='xdg-open'
 alias clean='rm -f *~ .*~ \#* .\#*'
@@ -50,6 +52,10 @@ else
 		mkdir -p ~/Work
 	fi
 fi
+alias fila='squeue --me'
+alias afila='watch -n 10 squeue --me --sort=-+P,p'
+alias cancelmyjobs="squeue --me -h | awk '{print \$1}' | xargs -I'{}' scancel '{}'"
+alias myprojects='sacctmgr -nP show assoc where user=$(whoami) format=account'
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -107,10 +113,35 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:~/Bin/uenv/bin
-export PATH=$PATH:~/Bin/stackinator/bin
-export PATH=$PATH:~/Bin/reframe/bin
+# environment varibles
+export SQUEUE_FORMAT="%.18i %.9P %.30j %.12u %.2t %.10M %.6D %30R %Z"
 
-#export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-#export PATH="$GEM_HOME/bin:$PATH"
-#export PATH=$PATH:~/Bin/vagrant/bin
+
+# custom applications
+if [ -d ~/Bin/uenv/bin ]; then
+    export PATH=$PATH:~/Bin/uenv/bin
+fi
+#export PATH=$PATH:~/Bin/reframe/bin
+
+# UV
+export UV_TOOL_BIN_DIR=$HOME/.local/$(uname -m)/bin
+export UV_TOOL_DIR=$HOME/.local/$(uname -m)/share/uv/tools
+export PATH=$UV_TOOL_BIN_DIR:$PATH
+
+# install reframe
+__iatest=$(expr index "$-" i)
+case "$TERM" in
+    xterm*|rxvt*|linux|alacritty)
+        if [[ ${__iatest} > 0 ]]; then
+            if [ ! -f $HOME/.local/$(uname -m)/bin/reframe ]; then
+                uv tool install reframe-hpc
+            fi
+        fi
+    ;;
+esac
+unset __iatest
+
+
+alias prun='podman run --rm -it -v $HOME:$HOME debian-toolchian-builder:latest'
+alias pbuild='podman build -t debian-toolchian-builder -f debian-toolchian-builder '
+
