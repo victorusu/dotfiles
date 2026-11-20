@@ -134,7 +134,18 @@ case "$TERM" in
     xterm*|rxvt*|linux|alacritty)
         if [[ ${__iatest} > 0 ]]; then
             if [ ! -f $HOME/.local/$(uname -m)/bin/reframe ]; then
-                uv tool install reframe-hpc
+                if [ -f $UV_TOOL_BIN_DIR/uv ]; then
+                    uv tool install reframe-hpc
+                fi
+            fi
+            if [ ! -d $HOME/Bin/spack ]; then
+                cd $HOME/Bin
+                git clone --depth=2 https://github.com/spack/spack
+                . $HOME/Bin/spack/share/spack/setup-env.sh
+                spack compiler find --scope site
+                spack bootstrap now
+            else
+                . $HOME/Bin/spack/share/spack/setup-env.sh
             fi
         fi
     ;;
